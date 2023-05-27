@@ -24,12 +24,22 @@ module.exports = async (req, res, next) => {
     const nickname = sender && sender.nickname ? sender.nickname : user_id
     let _msg = msg.raw_message ? msg.raw_message : msg.message //消息
     let filterArr = ['/智慧之问', '/设置人格', '/图片', '/清除历史']
-    filterArr = filterArr.filter(item => {
-      return _msg.indexOf(item) !== -1
-    })
-    if (filterArr.length <= 0) {
+    if(_msg) {
+      filterArr = filterArr.filter(item => {
+        return _msg.indexOf(item) !== -1
+      })
+      if (filterArr.length <= 0) {
+        return
+      }
+    }else {
       return
     }
+    // filterArr = filterArr.filter(item => {
+    //   return _msg.indexOf(item) !== -1
+    // })
+    // if (filterArr.length <= 0) {
+    //   return
+    // }
     const ret = await userDao.queryUserById({ user_id })
     console.log('---middle-auth-查询user表结果---', ret)
     if (ret.length <= 0) {

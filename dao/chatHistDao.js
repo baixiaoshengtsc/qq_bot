@@ -5,7 +5,7 @@ const moment = require('moment')
 const chatHistDao = {
   queryChatHistory: ({user_id}) => {
     try {
-      const sql = `SELECT * FROM chat_his WHERE qq_id=? AND status = '1' ORDER BY created_time DESC LIMIT 10`
+      const sql = `SELECT * FROM chat_his WHERE qq_id=? AND status = '1' ORDER BY created_time DESC LIMIT 20`
       return fn(sql, [user_id])
     } catch (error) {
       console.log('---dao层queryChatHistory---', error)

@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
       console.log('---middle中间件updateMessage查询账号最新发言记录----', ret)
       if(Array.isArray(ret) && ret.length>0) {
         const t = moment(ret[0].created_time)
-        const updateT = moment('2023-05-19')
+        const updateT = moment('2023-06-27')
         console.log('t<updateT', t<updateT)
         if(t<updateT) {
           const updatedMsg = [
@@ -43,6 +43,22 @@ module.exports = async (req, res, next) => {
                 name: '全知全能',
                 uin: self_id,
                 content: `~使用/清除历史可以清除之前的对话历史了~`
+              }
+            },
+            {
+              type: 'node',
+              data: {
+                name: '全知全能',
+                uin: self_id,
+                content: `~2023-06-28最新功能日志~`
+              }
+            },
+            {
+              type: 'node',
+              data: {
+                name: '全知全能',
+                uin: self_id,
+                content: `~api付费问题终于解决了现在存储20条上下文and优化了一下合并转发的历史消息and改了点不知道怎么辉石的bug~`
               }
             },
           ]

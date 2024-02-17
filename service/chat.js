@@ -49,7 +49,7 @@ module.exports = async (msg) => {
   }
   // 3.请求openai
   const res = await getChat(filter, sys, cache)
-  let str = (res && res.content) ? res.content : `gpt并不想回答你的问题并试图用错误代码塞爆我的一核两g腾讯云`
+  let str = (res && res.content) ? res.content : `gpt并不想回答你的问题并试图用错误代码塞爆我的四核8g腾讯云`
 
   let util = (hisArr, userId, selfId) => {
     const user_id = userId
@@ -84,8 +84,23 @@ module.exports = async (msg) => {
   }
 
   const ret1 = util(cache, user_id, self_id)
+  let ret3 = []
+  if(ret1.length>0) {
+    ret1.shift()
+    ret3 = [
+      {
+        type: 'node',
+        data: {
+          name: `全知全能`,
+          uin: self_id,
+          content: ret1
+        }
+      }
+    ]
+  }
+  
 
-  const ret2 = ret1.concat([{
+  const ret2 = ret3.concat([{
       type: 'node',
       data: {
         name: `master`,
@@ -104,7 +119,7 @@ module.exports = async (msg) => {
   ])
 
   console.log('---service层chat-ret2---', ret2)
-  ret2.shift()
+  // ret2.shift()
   atMaster({group_id, user_id})
 
   apiList.send_group_forward_msg({
@@ -117,7 +132,7 @@ module.exports = async (msg) => {
   })
 
   // 4.成功则返回并插入 || 失败返回不插入
-  if(str !== 'gpt并不想回答你的问题并试图用错误代码塞爆我的一核两g腾讯云') {
+  if(str !== 'gpt并不想回答你的问题并试图用错误代码塞爆我的四核8g腾讯云') {
     try {
       await chatHistDao.updateChatHistory({user_id, role: 'user', content: _msg})
       setTimeout(async ()=>{

@@ -1,27 +1,19 @@
 const { apiList } = require('./');
-exports.getChat = async (input, sys, cache) => {
-  let arr
-
-  if (input) {
-    if (cache.length > 20) {
-      cache.shift()
+exports.getChat = async (input) => {
+  let sys = `你是一个专业的计算机从业者,会尽量从专业的角度回答问题`
+  let arr = [
+    {
+      role: 'system',
+      content: sys
+    },
+    {
+      role: 'assistant',
+      content: input
     }
-    cache.push(input)
-  }
-
-  if (sys) {
-    arr = [{
-        "role": "system",
-        "content": sys
-      }
-    ].concat(cache)
-  } else {
-    arr = cache
-    console.log('-----sys-----', sys)
-  }
+  ]
   try {
     let data = {
-      model: "gpt-4-1106-preview", 
+      model: "gpt-3.5-turbo", 
       messages: arr
     };
     let completion = await apiList.getChat(data).then((response)=>{

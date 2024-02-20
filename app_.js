@@ -1,5 +1,6 @@
 ﻿const express = require('express')
 const app = express()
+const helmet = require('helmet');
 require('dotenv').config({ path: '.env.local' })
 
 const bus = require('./middle/bus')
@@ -11,6 +12,10 @@ const {
   getChat
 } = require('./api/gpt.js')
 const {chatgpt} = require('./api/chatgpt.js')
+
+const chatAuth = require('./middle/chatAuth.js')
+const chatNums = require('./middle/chatNums.js')
+const getChatNums = require('./middle/getChatNums.js')
 app.all("*",function(req,res,next){
   //设置允许跨域的域名，*代表允许任意域名跨域
   res.header("Access-Control-Allow-Origin","http://localhost:3000");
@@ -25,6 +30,7 @@ app.all("*",function(req,res,next){
       next();
 })
 
+app.use(helmet());
 app.use(express.static('./'))
 app.use(express.json())
 
@@ -39,7 +45,7 @@ console.log(req.body)
   let str = (ret && ret.content) ? ret.content : `gpt并不想回答你的问题并试图用错误代码塞爆我的四核8g腾讯云`
   res.send(str)
 })
-app.post('/api/chat', async(req, res ,next) => {
+app.post('/api/chat', chatAuth, chatNums, async(req, res ,next) => {
   console.log('--收到客户端消息--', req.body)
   const option = req.body.option
   const history = req.body.history
@@ -54,7 +60,8 @@ app.post('/api/chat', async(req, res ,next) => {
         role: item.type,
         content: item.content
       }
-    }), option.temperature, option.type)
+    }), option.temperature, option.type, option.maxLength)
+
     res.send({
       status: 0,
       statusText: 'success',
@@ -63,14 +70,60 @@ app.post('/api/chat', async(req, res ,next) => {
   } catch (error) {
     res.send({
       status: -1,
-      statusText: error,
+      statusText: 'openai响应错误，请检查历史记录长度是否超标，请缩短设置历史记录长度后再次重试，如果再次报错请安抚机魂或联系作者',
       data: null
     })
   }
-  
-
-  
 })
+app.post('/api/chat', chatAuth, chatNums, async(req, res ,next) => {
+  console.log('--收到客户端消息--', req.body)
+  const option = req.body.option
+  const history = req.body.history
+  const content = req.body.content
+  
+  try {
+    const ret = await chatgpt({
+      role: 'user',
+      content
+    }, option.system, history.map(item => {
+      return {
+        role: item.type,
+        content: item.content
+      }
+    }), option.temperature, option.type, option.maxLength)
+
+    res.send({
+      status: 0,
+      statusText: 'success',
+      data: ret
+    })
+  } catch (error) {
+    res.send({
+      status: -1,
+      statusText: `openai响应错误，可能存在的问题如下：
+      -  如使用gpt4模型，请切换模型或者等待一分钟请求冷却后再试。
+      -  如非请求冷却问题请检查历史记录长度是否超标，请缩短设置历史记录长度后再次重试。
+      -  由于openai最近新发布视频模型，导致洋人的服务器被拉爆了，也有可能是单纯的openai服务器宕机。
+      > 
+      >  鸣大钟一次！
+      > 
+      >  推动杠杆，启动活塞和泵……
+      > 
+      >  鸣大钟两次！
+      > 
+      >  按下按钮，发动引擎，点燃涡轮，注入生命……
+      > 
+      >  鸣大钟三次！
+      > 
+      >  齐声歌唱，赞美万机之神！
+      >
+      ***如果排除以上问题且安抚机魂后仍报错，请联系作者(485434766)。***`,
+      data: null
+    })
+  }
+})
+
+app.post('/api/chat/getNums', getChatNums)
 app.listen(8060, () => {
   console.log('server running ai http://127.0.0.1')
 }) 

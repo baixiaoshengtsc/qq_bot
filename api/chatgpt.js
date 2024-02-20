@@ -2,7 +2,7 @@
  * @Author: baixiaoshengtsc 485434766@qq.com
  * @Date: 2024-02-19 21:38:02
  * @LastEditors: baixiaoshengtsc 485434766@qq.com
- * @LastEditTime: 2024-02-20 01:17:42
+ * @LastEditTime: 2024-02-20 22:05:05
  * @FilePath: \qq_bot\api\chatgpt.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,11 +13,11 @@ const modelList = {
   gpt4: 'gpt-4-1106-preview',
   gpt3_5:'gpt-3.5-turbo-0125',
 }
-exports.chatgpt = async (input, sys, cache, temperature=0.7, type='gpt4') => {
+exports.chatgpt = async (input, sys, cache, temperature=0.7, type='gpt4', maxLength=20) => {
   let arr
 
   if (input) {
-    if (cache.length > 24) {
+    if (cache.length > maxLength) {
       cache.shift()
     }
     cache.push(input)
@@ -43,7 +43,7 @@ exports.chatgpt = async (input, sys, cache, temperature=0.7, type='gpt4') => {
       // console.log('---response---' ,response)
       return response.data.choices[0].message
     }).catch((error)=>{
-      // console.log(error)
+      console.log(error)
       throw new Error(error);
     })
     

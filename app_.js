@@ -70,36 +70,6 @@ app.post('/api/chat', chatAuth, chatNums, async(req, res ,next) => {
   } catch (error) {
     res.send({
       status: -1,
-      statusText: 'openai响应错误，请检查历史记录长度是否超标，请缩短设置历史记录长度后再次重试，如果再次报错请安抚机魂或联系作者',
-      data: null
-    })
-  }
-})
-app.post('/api/chat', chatAuth, chatNums, async(req, res ,next) => {
-  console.log('--收到客户端消息--', req.body)
-  const option = req.body.option
-  const history = req.body.history
-  const content = req.body.content
-  
-  try {
-    const ret = await chatgpt({
-      role: 'user',
-      content
-    }, option.system, history.map(item => {
-      return {
-        role: item.type,
-        content: item.content
-      }
-    }), option.temperature, option.type, option.maxLength)
-
-    res.send({
-      status: 0,
-      statusText: 'success',
-      data: ret
-    })
-  } catch (error) {
-    res.send({
-      status: -1,
       statusText: `openai响应错误，可能存在的问题如下：
       -  如使用gpt4模型，请切换模型或者等待一分钟请求冷却后再试。
       -  如非请求冷却问题请检查历史记录长度是否超标，请缩短设置历史记录长度后再次重试。

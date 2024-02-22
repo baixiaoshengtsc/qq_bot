@@ -61,13 +61,14 @@ app.post('/api/chat', chatAuth, chatNums, async(req, res ,next) => {
         content: item.content
       }
     }), option.temperature, option.type, option.maxLength)
-
+    console.log('--gpt回复--', ret)
     res.send({
       status: 0,
       statusText: 'success',
       data: ret
     })
   } catch (error) {
+    console.log('--gpt报错--', error)
     res.send({
       status: -1,
       statusText: `

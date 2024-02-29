@@ -27,8 +27,8 @@ exports.request = {
       params: param,
     })
   },
-  post(url, param = {}) {
-    return AJAX.post(url, param)
+  post(url, param = {}, config) {
+    return AJAX.post(url, param, config)
   },
   
 }

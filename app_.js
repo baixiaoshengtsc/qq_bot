@@ -50,7 +50,6 @@ app.post('/api/chat', chatAuth, chatNums, async(req, res ,next) => {
   const option = req.body.option
   const history = req.body.history
   const content = req.body.content
-  
   try {
     const ret = await chatgpt({
       role: 'user',
@@ -60,13 +59,14 @@ app.post('/api/chat', chatAuth, chatNums, async(req, res ,next) => {
         role: item.type,
         content: item.content
       }
-    }), option.temperature, option.type, option.maxLength)
-    console.log('--gpt回复--', ret)
-    res.send({
-      status: 0,
-      statusText: 'success',
-      data: ret
-    })
+    }), option.temperature, option.type, option.maxLength, res)
+    // ret.data.pipe(res)
+    // console.log('--gpt回复--', ret)
+    // res.send({
+    //   status: 0,
+    //   statusText: 'success',
+    //   data: ret
+    // })
   } catch (error) {
     console.log('--gpt报错--', error)
     res.send({

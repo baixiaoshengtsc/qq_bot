@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node ./app.js",
-    "relive": "node ./app_.js"
+    "dev": "cross-env ENV=development node ./app_.js",
+    "prod": "cross-env ENV=production node ./app_.js"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +20,8 @@
     "mysql": "^2.18.1",
     "openai": "^3.2.1",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

@@ -35,4 +35,4 @@ USER node
 EXPOSE 8060
 
 # Run the application.
-CMD node app_.js
+CMD npm run prod

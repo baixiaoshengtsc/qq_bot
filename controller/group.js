@@ -1,5 +1,5 @@
 const replaceMsg = require('../util/replaceMsg')
-const { chat, aiSetting, deleteChatHis } = require('../service')
+const { chat, aiSetting, deleteChatHis, ff14 } = require('../service')
 
 /**
  * @description: controller层的group入口
@@ -13,7 +13,7 @@ module.exports = (msg) => {
     const message_id = msg.message_id // 消息id
     const group_id = msg.group_id // 群id
     let _msg = msg.raw_message ? msg.raw_message : msg.message //消息
-    console.log(`_msg.indexOf('/智慧之问' !== -1)`, _msg.indexOf('/智慧之问' !== -1))
+    // console.log(`_msg.indexOf('/智慧之问' !== -1)`, _msg.indexOf('/智慧之问') !== -1)
     if(_msg.indexOf('/设置人格') !== -1) {
       _msg = replaceMsg('/设置人格', _msg)
       const params = {
@@ -42,6 +42,16 @@ module.exports = (msg) => {
         group_id,
       }
       deleteChatHis(params)
+    }else if(_msg.indexOf('/价格')!==-1) {
+      _msg = replaceMsg('/价格', _msg)
+      const params = {
+        user_id,
+        self_id,
+        message_id,
+        group_id,
+        _msg
+      }
+      ff14(params)
     }
   } catch (error) {
     console.log('---controller层group错误---', error)

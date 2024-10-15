@@ -2,7 +2,7 @@
  * @Author: baixiaoshengtsc 485434766@qq.com
  * @Date: 2024-02-17 10:52:38
  * @LastEditors: baixiaoshengtsc 485434766@qq.com
- * @LastEditTime: 2024-02-29 19:56:42
+ * @LastEditTime: 2024-10-15 15:17:53
  * @FilePath: \qq_bot\api\index.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,4 +13,9 @@ exports.apiList = {
   getImg: data => request.post('https://api.openai.com/v1/images/generations', data),
   getChat: (data, config) => request.post('https://hk.xty.app/v1/chat/completions', data, config),
   // getImg: data => request.post('https://hk.xty.app/v1/images/generations', data),
+  // getChat: (data, config) => request.post('https://hk.xty.app/v1/chat/completions', data, config),
+  // getImg: data => request.post('https://hk.xty.app/v1/images/generations', data),
+
+  getDataIds: data => request.get(`https://cafemaker.wakingsands.com/search`, {indexes: 'Item', ...data}),
+  getItemData: data => request.get(`https://universalis.app/api/v2/莫古力/${data.id}`),
 }

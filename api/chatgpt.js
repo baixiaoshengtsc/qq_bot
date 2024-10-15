@@ -2,7 +2,7 @@
  * @Author: baixiaoshengtsc 485434766@qq.com
  * @Date: 2024-02-19 21:38:02
  * @LastEditors: baixiaoshengtsc 485434766@qq.com
- * @LastEditTime: 2024-02-29 21:08:59
+ * @LastEditTime: 2024-05-15 11:35:34
  * @FilePath: \qq_bot\api\chatgpt.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -42,6 +42,7 @@ exports.chatgpt = async (input, sys, cache, temperature=0.7, type='gpt4', maxLen
       temperature: temperature,
       stream: true
     };
+    console.log('model', modelList[type])
     let {data: data2} = await apiList.getChat(data, {
       responseType:'stream',
       headers:{

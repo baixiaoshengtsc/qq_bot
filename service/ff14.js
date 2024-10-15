@@ -109,7 +109,7 @@ module.exports = async (msg) => {
       const ret2 = await dataList(id)
       const list = ret2.listings
       const fList = list.map((item) => {
-        return `${item.worldName}--价格:${item.pricePerUnit}--数量:${item.quantity}${item.hq ? '(hq)' : ''}`
+        return `${item.worldName}--价格:${item.pricePerUnit}--数量:${item.quantity}${item.hq ? '(hq)' : ''}\n`
       })
       const len = list.length
 
@@ -159,7 +159,7 @@ module.exports = async (msg) => {
     const ret2 = await dataList(id)
     const list = ret2.listings
     const fList = list.map((item) => {
-      return `${item.worldName}--价格:${item.pricePerUnit}--数量:${item.quantity}${item.hq ? '(hq)' : ''}`
+      return `${item.worldName}--价格:${item.pricePerUnit}--数量:${item.quantity}${item.hq ? '(hq)' : ''}\n`
     })
     const len = list.length
 

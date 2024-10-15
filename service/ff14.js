@@ -45,7 +45,7 @@ module.exports = async (msg) => {
   // 2.如果大于一个，返回列表，如果只有一个，直接查询
   // 3.查询对应的id，返回数据
 
-  const dbret = await ff14Dao.queryIdByItem({ item_name: msg })
+  const dbret = await ff14Dao.queryIdByItem({ item_name: _msg })
   console.log('数据库结果', dbret)
   let str
 
@@ -83,7 +83,7 @@ module.exports = async (msg) => {
   }
 
   if (dbret.length <= 0) {
-    const ret1 = await itemList(msg)
+    const ret1 = await itemList(_msg)
     const results = ret1.Results
     const fResult = results.map((item) => {
       return item.Name

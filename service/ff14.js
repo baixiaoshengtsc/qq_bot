@@ -215,7 +215,7 @@ module.exports = async (msg) => {
         uin: user_id,
         content: _msg
       }
-    },{
+    }, {
       type: 'node',
       data: {
         name: '全知全能',

@@ -23,14 +23,14 @@ module.exports = async (req, res, next) => {
     const sender = msg.sender || ''
     const nickname = sender && sender.nickname ? sender.nickname : user_id
     let _msg = msg.raw_message ? msg.raw_message : msg.message //消息
-    let filterArr = ['/智慧之问', '/设置人格', '/图片', '/清除历史']
+    let filterArr = ['/智慧之问', '/设置人格', '/图片', '/清除历史', '/价格']
     if(_msg) {
       filterArr = filterArr.filter(item => {
         return _msg.indexOf(item) !== -1
       })
       if (filterArr.length <= 0) {
         return
-      }
+      }``
     }else {
       return
     }

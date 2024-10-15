@@ -1,4 +1,4 @@
-/*
+﻿/*
  * @Author: baixiaoshengtsc 485434766@qq.com
  * @Date: 2024-02-17 10:52:38
  * @LastEditors: baixiaoshengtsc 485434766@qq.com
@@ -29,7 +29,7 @@ exports.getChat = async (input, sys, cache) => {
   }
   try {
     let data = {
-      model: "gpt-4-1106-preview", 
+      model: "gpt-4o", 
       messages: arr
     };
     let completion = await apiList.getChat(data).then((response)=>{

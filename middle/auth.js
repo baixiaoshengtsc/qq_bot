@@ -68,7 +68,7 @@ module.exports = async (req, res, next) => {
           data: {
             name: '全知全能',
             uin: self_id,
-            content: `ff14使用/价格 武略魔晶石拾贰型查询已有的交易板数据,攻略相关待开发`
+            content: `ff14使用"/价格 武略魔晶石拾贰型"查询已有的交易板数据,攻略相关待开发`
           }
         },
       ]

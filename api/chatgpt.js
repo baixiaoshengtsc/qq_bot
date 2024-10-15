@@ -1,4 +1,4 @@
-/*
+﻿/*
  * @Author: baixiaoshengtsc 485434766@qq.com
  * @Date: 2024-02-19 21:38:02
  * @LastEditors: baixiaoshengtsc 485434766@qq.com
@@ -9,6 +9,7 @@
 const { apiList } = require('./');
 const fs = require('fs');
 const modelList = {
+  gpt4o: 'gpt-4o',
   gpt4Plus: 'gpt-4-0125-preview',
   gpt4Img: 'gpt-4-1106-vision-preview',
   gpt4: 'gpt-4-1106-preview',

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * @Author: baixiaoshengtsc 485434766@qq.com
  * @Date: 2024-02-17 10:52:38
  * @LastEditors: baixiaoshengtsc 485434766@qq.com
@@ -9,6 +9,8 @@
 const { request } = require('../common')
 
 exports.apiList = {
-  getChat: (data, config) => request.post('https://api.openai.com/v1/chat/completions', data, config),
+  //getChat: (data, config) => request.post('https://api.openai.com/v1/chat/completions', data, config),
   getImg: data => request.post('https://api.openai.com/v1/images/generations', data),
+  getChat: (data, config) => request.post('https://hk.xty.app/v1/chat/completions', data, config),
+  // getImg: data => request.post('https://hk.xty.app/v1/images/generations', data),
 }

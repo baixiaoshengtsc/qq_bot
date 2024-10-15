@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
       })
       if (filterArr.length <= 0) {
         return
-      }``
+      }
     }else {
       return
     }
@@ -60,7 +60,7 @@ module.exports = async (req, res, next) => {
           data: {
             name: '全知全能',
             uin: self_id,
-            content: `调用接口为openai-gpt-3.5-turbo模型接口,训练数据集截至2021-9`
+            content: `调用对话接口为openai-gpt-4o模型接口,训练数据集截至2024-10\n使用'/设置人格'指令可修改默认人设,具体复杂人设咒语请参照github相关项目所给出示例\n使用'/智慧之问'指令可开始对话,对话已实现独立用户上下文记忆,上下文记忆长度为最近问答共二十句\n~使用/清除历史可以清除之前的对话历史~`
           }
         },
         {
@@ -68,23 +68,7 @@ module.exports = async (req, res, next) => {
           data: {
             name: '全知全能',
             uin: self_id,
-            content: `使用'/设置人格'指令可修改默认人设,具体复杂人设咒语请参照github相关项目所给出示例,目前并不支持存储对话加深人设,人设实现方案详见openai官方文档对请求体中message对象的role值为'system'字段的使用`
-          }
-        },
-        {
-          type: 'node',
-          data: {
-            name: '全知全能',
-            uin: self_id,
-            content: `使用'/智慧之问'指令可开始对话,对话已实现独立用户上下文记忆,上下文记忆长度为最近问答共二十句`
-          }
-        },
-        {
-          type: 'node',
-          data: {
-            name: '全知全能',
-            uin: self_id,
-            content: `~使用/清除历史可以清除之前的对话历史~`
+            content: `ff14使用/价格 武略魔晶石拾贰型查询已有的交易板数据,攻略相关待开发`
           }
         },
       ]

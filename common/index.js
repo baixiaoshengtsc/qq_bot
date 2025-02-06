@@ -21,11 +21,14 @@ const getProxy = () => {
   }
 }
 AJAX.interceptors.request.use(function (config) {
-  Object.assign(config.headers, {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${key}`
-  })
-  config.proxy = getProxy()
+  // console.log('发送前拦截器', config.headers)
+  if(!config.headers.Authorization) {
+    Object.assign(config.headers, {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${key}`
+    })
+  }
+  // config.proxy = getProxy()
   return config
 }, function(error){
   console.log('AJAX错误', error)
@@ -38,6 +41,7 @@ exports.request = {
     })
   },
   post(url, param = {}, config) {
+    console.log('post请求', url, param, config)
     return AJAX.post(url, param, config)
   },
   

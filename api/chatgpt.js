@@ -32,7 +32,6 @@ const modelList2 = {
 }
 exports.chatgpt = async (input, sys, cache, temperature=0.7, type='gpt4', maxLength=20, res, con) => {
   let arr
-
   if (input) {
     if (cache.length > maxLength) {
       cache.shift()
@@ -80,7 +79,7 @@ exports.chatgpt = async (input, sys, cache, temperature=0.7, type='gpt4', maxLen
         temperature: temperature,
         stream: true
       };
-      console.log('model', con ? modelList2[type] : modelList[type])
+      console.log('model', con, con ? modelList2[type] : modelList[type])
       let {data: data2} = await apiList.getChat(data, {
         responseType:'stream',
         headers:{

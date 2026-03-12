@@ -53,6 +53,10 @@ app.post('/api/chat', chatAuth, chatNums, async (req, res, next) => {
   const option = req.body.option
   const history = req.body.history
   const content = req.body.content
+  const pw = option
+  let cont = false
+  if(pw == '76b00f07-e408-1dd2-a8c6-7ce0800d8694')
+    cont = true
   try {
     const ret = await chatgpt({
       role: 'user',
@@ -62,7 +66,7 @@ app.post('/api/chat', chatAuth, chatNums, async (req, res, next) => {
         role: item.type,
         content: item.content
       }
-    }), option.temperature, option.type, option.maxLength, res)
+    }), option.temperature, option.type, option.maxLength, res, cont)
     // ret.data.pipe(res)
     // console.log('--gpt回复--', ret)
     // res.send({

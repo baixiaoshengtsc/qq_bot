@@ -55,6 +55,8 @@ app.post('/api/chat', chatAuth, chatNums, async (req, res, next) => {
   const content = req.body.content
   const pw = option
   let cont = false
+  console.log('pw===>', pw)
+  console.log('76b00f07-e408-1dd2-a8c6-7ce0800d8694', pw == '76b00f07-e408-1dd2-a8c6-7ce0800d8694')
   if(pw == '76b00f07-e408-1dd2-a8c6-7ce0800d8694')
     cont = true
   try {

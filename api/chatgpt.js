@@ -2,7 +2,7 @@
  * @Author: baixiaoshengtsc 485434766@qq.com
  * @Date: 2024-02-19 21:38:02
  * @LastEditors: baixiaoshengtsc 485434766@qq.com
- * @LastEditTime: 2026-03-12 15:42:30
+ * @LastEditTime: 2026-03-12 16:26:16
  * @FilePath: \qq_bot\api\chatgpt.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,7 +10,7 @@ const { apiList } = require('./');
 const fs = require('fs');
 const modelList = {
   dsV3: 'deepseek-chat',
-  dsV3: 'deepseek-reasoner',
+  dsR1: 'deepseek-reasoner',
   // dsV3: 'qwen-qwq',
   // dsR1: 'deepseek-reasoner',
   gpto1: 'deepseek-chat',

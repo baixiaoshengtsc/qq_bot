@@ -11,6 +11,7 @@ const { pool } = require('./poolUtil.js')
 const chatPwDAO = {
   updateChatPw: ({pw, nums}) => {
     try {
+      console.log('pw======>', pw, nums)
       const sql = `UPDATE chat_pw SET nums = ? WHERE pw=?`
       return fn(sql, [nums, pw])
     } catch (error) {

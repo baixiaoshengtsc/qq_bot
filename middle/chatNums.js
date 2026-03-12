@@ -10,6 +10,7 @@ module.exports = async (req, res, next) => {
   try {
     const nums = req.nums
     const pw = req.body.option.pw
+    console.log('进入了--->', pw)
     const ret = await chatPwDAO.updateChatPw({pw: 'fefdc625-13a8-4a81-b82a-b0bf768eb5a1', nums :Number(nums)+1})
     next()
   } catch (error) {
